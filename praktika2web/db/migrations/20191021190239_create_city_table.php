@@ -30,40 +30,34 @@ class CreateCityTable extends AbstractMigration
      * with the Table class.
      */
      public function change()
-     {
-         $city = $this->table('city');
-         $city->addColumn(id);
-     }
- 
-     public function up()
-     {
-         $city = $this->table('city');
-         $city->addColumn('name', 'string',['limit' => 50, 'null' => false])
-         ->addForeignKey('code', 'country', 'id')
-         ->addColumn('district', 'string',['null' => false])
-         ->addColumn('population', 'integer')
-         ->create();
-         //->save();
- 
-         // Using SQL
-         // $sql = '
-         // CREATE TABLE `authors` (
-         // `id` int(11) NOT NULL,
-         // `firstname` varchar(50) NOT NULL,
-         // `lastname` varchar(50) NOT NULL,
-         // ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
- 
-         // ALTER TABLE `authors`
-         // ADD PRIMARY KEY (`id`);
- 
-         // ALTER TABLE `authors`
-         // MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;';
-         // $this->execute($sql);
-     }
- 
-     public function down()
-     {
-         $this->dropTable('city');
-     }
-     
+    {
+        $city = $this->table('city');
+        $city->addColumn('id','integer');
+        $city = $this->table('city');
+        $city->addColumn('name', 'string',['limit' => 50, 'null' => false])
+        ->addColumn('countrycode', 'string')
+        ->addColumn('district', 'string',['null' => false])
+        ->addColumn('population', 'integer')
+        ->create();
+        //->save();
+        // Using SQL
+        // $sql = '
+        // CREATE TABLE `authors` (
+        // `id` int(11) NOT NULL,
+        // `firstname` varchar(50) NOT NULL,
+        // `lastname` varchar(50) NOT NULL,
+        // ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        // ALTER TABLE `authors`
+        // ADD PRIMARY KEY (`id`);
+        // ALTER TABLE `authors`
+        // MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;';
+        // $this->execute($sql);
+    }
+    /*
+    public function down()
+    {
+        $this->dropTable('city');
+    }
+    */
+
 }

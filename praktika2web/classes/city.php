@@ -6,4 +6,7 @@ class city {
     public $district;
     public $population;
 } 
+
+
+
 ?>

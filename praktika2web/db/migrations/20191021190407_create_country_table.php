@@ -29,12 +29,15 @@ class CreateCountryTable extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
+
+
+     
      public function change()
      {
          $country = $this->table('country');
-         $country->addColumn('code', 'string',['limit' => 50, 'null' => false])
-         ->addColumn('name', 'string',['null' => false])
-         ->addColumn('continent', 'string',['null' => false])
+         $country->addColumn('code', 'string')
+         ->addColumn('name', 'string')
+         ->addColumn('continent', 'string')
          ->addColumn('region', 'string')
          ->addColumn('surfacearea', 'integer')
          ->addColumn('indepyear', 'integer')
@@ -62,10 +65,30 @@ class CreateCountryTable extends AbstractMigration
          // MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;';
          // $this->execute($sql);
      }
+
+
+
  /*
      public function down()
      {
          $this->dropTable('country');
      }
  */
+
+ /*
+    public function up()
+    {
+     $sqlQueries = [];
+ 
+     $sqlQueries[] = "INSERT INTO country (code, name, continent, region, surfacearea, indepyear, population, lifeexpectancy, gnp, gnpold, localname, governmentform, headofstate, capital, code2) VALUES ('KEN','Kenya','Africa','Eastern Africa', 580367, 1963, 30080000, 48, 9217, 10241,'Kenya','Republic','Daniel arap Moi', 1881,'KE');";
+     $sqlQueries[] = "INSERT INTO country (code, name, continent, region, surfacearea, indepyear, population, lifeexpectancy, gnp, gnpold, localname, governmentform, headofstate, capital, code2) VALUES ('NLD','Netherlands','Europe','Western Europe', 41526, 1581, 15864000, 78.3000031, 371362, 360478,'Nederland','Constitutional Monarchy','Beatrix', 5,'NL');";
+     $sqlQueries[] = "INSERT INTO country (code, name, continent, region, surfacearea, indepyear, population, lifeexpectancy, gnp, gnpold, localname, governmentform, headofstate, capital, code2) VALUES ('DZA','Algeria','Africa','Northern Africa', 2381740, 1962, 31471000, 69.6999969, 49982, 46963,'Al-JazaŠ²Š‚ā„¢ir','Republic','Abdelaziz Bouteflika', 35,'DZ');";
+     $sqlQueries[] = "INSERT INTO country (code, name, continent, region, surfacearea, indepyear, population, lifeexpectancy, gnp, gnpold, localname, governmentform, headofstate, capital, code2) VALUES ('COL','Colombia','South America','South America', 1138910, 1810, 42321000, 70.3000031, 102896, 105116,'Colombia','Republic','AndrŠ“Ā©s Pastrana Arango', 2257,'CO');";
+     $sqlQueries[] = "INSERT INTO country (code, name, continent, region, surfacearea, indepyear, population, lifeexpectancy, gnp, gnpold, localname, governmentform, headofstate, capital, code2) VALUES ('BEN','Benin','Africa','Western Africa', 112622, 1960, 6097000, 50.2000008, 2357, 2141,'BŠ“Ā©nin','Republic','Mathieu KŠ“Ā©rŠ“Ā©kou', 187,'BJ');";
+ 
+     foreach ($sqlQueries as $sql) {
+         $this->execute($sql);
+     }
+         }
+*/
 }

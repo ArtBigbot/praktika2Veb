@@ -29,14 +29,17 @@ class CreateCityTable extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
+
+
+
      public function change()
     {
         $city = $this->table('city');
         $city->addColumn('id','integer');
         $city = $this->table('city');
-        $city->addColumn('name', 'string',['limit' => 50, 'null' => false])
+        $city->addColumn('name', 'string')
         ->addColumn('countrycode', 'string')
-        ->addColumn('district', 'string',['null' => false])
+        ->addColumn('district', 'string')
         ->addColumn('population', 'integer')
         ->create();
         //->save();
@@ -53,11 +56,33 @@ class CreateCityTable extends AbstractMigration
         // MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;';
         // $this->execute($sql);
     }
+
+
+
+
     /*
     public function down()
     {
         $this->dropTable('city');
     }
     */
+/*
+    public function up()
+    {
+        $sqlQueries = [];
+    
+        $sqlQueries[] = "INSERT INTO city (id, name, countrycode, district, population) VALUES (3236, 'Helsinki [Helsingfors]', 'FIN', 'Newmaa', 555474);";
+        $sqlQueries[] = "INSERT INTO city (id, name, countrycode, district, population) VALUES (134, 'Adelaide', 'AUS', 'South Australia', 978100);";
+        $sqlQueries[] = "INSERT INTO city (id, name, countrycode, district, population) VALUES (1525, 'Linz ', 'AUT', 'North Austria', 188022);";
+        $sqlQueries[] = "INSERT INTO city (id, name, countrycode, district, population) VALUES (1527, 'Innsbruck', 'AUT', 'Tiroli', 111752);";
+        $sqlQueries[] = "INSERT INTO city (id, name, countrycode, district, population) VALUES (1528, 'Klagenfurt', 'AUT', 'Kärnten', 91141);";
+    
+        foreach ($sqlQueries as $sql) {
+            $this->execute($sql);
+        }
+            }
+*/
+
+
 
 }

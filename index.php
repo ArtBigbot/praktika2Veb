@@ -1,10 +1,10 @@
 <?php
-<<<<<<< HEAD
 require_once "vendor/autoload.php";
 \Slim\Slim::registerAutoloader();
 $app = new \Slim\Slim();
 
-$app->get('/api/v1/world/country/all', function(){
+//$app->get('/api/v1/world/country/all', function(){
+    /*
     require_once('/db/dbconnect.php');
     $query = "select * from country";
     $result =$mysqli->query($query);
@@ -12,9 +12,16 @@ $app->get('/api/v1/world/country/all', function(){
         $data[] = $row;
     }
     echo json_encode($data);
-});
-$app->run();
+    */
+    
+    $api->get('/api/v1/world/country/all','\app\db\country:getCountries')->name('get_countries');// get all countries
 
+    $api->get('/api/v1/world/country/continent/:name','\app\db\country:getContinent')->name('get_Continent');// get continent by name
+    $api->get('/api/v1/world/country/:name/city/all','\app\db\country:getAllCities')->name('get_CountryCities');
+    
+//});
+//$app->run();
+/*
 $app->get('/api/v1/world/country/continent/{name}(Europa)', function(){
     require_once('/db/dbconnect.php');
     $query = "select * from country";
@@ -23,21 +30,5 @@ $app->get('/api/v1/world/country/continent/{name}(Europa)', function(){
         $data[] = $row;
     }
     echo json_encode($data);
-});
-=======
-require '../vendor/autoload.php'
-$app = new \Slim\App();
-
-//example
-
-$app->get('/', function($request, $response, $args){
-    $response->write('Welcome to Slim')
-})
-""
-$app->get('/countries', function($request, $response, $args) use ($countries){
-    return $response->withJson($countries)
-})
-
-//example
->>>>>>> c56cb043123e99e375966d6b6430f11dfb3811f3
+});*/
 ?>

@@ -26,7 +26,7 @@ $password = $data->password;
 $table_name = 'Users';
 
 $query = "INSERT INTO " . $table_name . "
-                SET first_name = :firstname,
+                VALUES first_name = :firstname,
                     last_name = :lastname,
                     email = :email,
                     password = :password";

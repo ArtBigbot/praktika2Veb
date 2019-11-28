@@ -13,10 +13,6 @@ class City extends Route {
         $district = ArrayUtils::get($payload, 'district');
 
         $country = new CountryObject ((int) $countryId);
-
-
-
-
         $city = new CityObject();
         $city ->name = $name;
         $district ->district = $district;
@@ -29,7 +25,6 @@ class City extends Route {
                 'message'=> 'Unable to add city'
             ]);
         }
-
         return $api->response([
             'success'=>true,
             'message'=> 'City was added',
@@ -53,12 +48,10 @@ class City extends Route {
                     'message'=>'City was not found'
 
                 ]);
-
             }
             return $api->response([
                 'success' => false,
                 'message' => 'Unable to update city'
-
             ]);
             $ok =$city->update();
 
@@ -72,8 +65,6 @@ class City extends Route {
                 'success' => true,
                 'message' => 'City updeted  successfully'
             ]);
-
-
         }
 
         public function deleteCity($cityId){

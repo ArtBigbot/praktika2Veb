@@ -10,7 +10,7 @@
         "slim/twig-view": "3.0.0-alpha",
         "symfony/var-dumper": "^3.2",
         "vlucas/phpdotenv": "^2.4",
-        "slim/psr7": "^0.3.0",
+        "slim/psr7": "^0.6.0",
         "php-di/php-di": "^6.0"
     },
     "autoload": {

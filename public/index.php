@@ -81,25 +81,25 @@ $app->get('/hello/{name}', function (Request $request, Response $response, $args
 //
 
 
-//$app-> group('/api',function ()  {
-   // $app->group('/v1',function() use ($api){
+$app-> group('/api',function ()  {
+    $app->group('/v1',function() use ($api){
         //get methods
-        $app->get('/all',\Country::class .':getCountries');// get all countries
+        $app->get('/all',\classes\Country::class .':getCountries');// get all countries
   
-        $app->get('/api/v1/world/country/continent/:name','\app\db\country:getCountryByContinent');// get continent by name
-        $app->get('/api/v1/world/country/:name/city/all','\app\db\country:getAllCities');
+        $app->get('/world/country/continent/:name',\classes\Country::class .':getCountryByContinent');// get continent by name
+       // $app->get('/world/country/{name}/city/all','\app\db\country:getAllCities');
         
     
         //post methods
-        $app->post('/addCity?','\praktika2web\classes\city:addCity');
+        $app->post('/addCity/{name}','\praktika2web\classes\City:addCity');
 
         //put methods
-        $app->patch('/cities/:cityId?','\praktika2web\classes\city:updateCity');
+        $app->patch('/cities/:cityId?','\praktika2web\classes\City:updateCity');
 
         //delete methods
-        $app->delete('/cities/:cityId?','\praktika2web\classes\city:deleteCity');
-   // })->add(new RouteMiddleware());
-//})->add(new GroupMiddleware());
+        $app->delete('/cities/:cityId?','\praktika2web\classes\City:deleteCity');
+    })->add(new RouteMiddleware());
+})->add(new GroupMiddleware());
 
 $app->run();
 

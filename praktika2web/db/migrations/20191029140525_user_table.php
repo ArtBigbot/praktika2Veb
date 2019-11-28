@@ -34,8 +34,8 @@ class UserTable extends AbstractMigration
         $user = $this->table('user');
         $user->addColumn('id','integer');
         $user = $this->table('user');
-        $user->addColumn('first_name', 'string')
-        ->addColumn('last_name', 'string')
+        $user->addColumn('firstname', 'string')
+        ->addColumn('lastname', 'string')
         ->addColumn('email', 'string')
         ->addColumn('password', 'integer')
         ->create();

@@ -1,24 +1,26 @@
 <?php
 // used to get mysql database connection
-class DatabaseService{
-
-    private $db_host = "localhost";
-    private $db_name = "praktika2WS";
-    private $db_user = "root";
-    private $db_password = "";
-    private $connection;
-
+class Database{
+ 
+    // specify your own database credentials
+    private $host = "localhost";
+    private $db_name = "api_db";
+    private $username = "root";
+    private $password = "";
+    public $conn;
+ 
+    // get the database connection
     public function getConnection(){
-
-        $this->connection = null;
-
+ 
+        $this->conn = null;
+ 
         try{
-            $this->connection = new PDO("mysql:host=" . $this->db_host . ";dbname=" . $this->db_name, $this->db_user, $this->db_password);
+            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
         }catch(PDOException $exception){
-            echo "Connection failed: " . $exception->getMessage();
+            echo "Connection error: " . $exception->getMessage();
         }
-
-        return $this->connection;
+ 
+        return $this->conn;
     }
 }
 ?>

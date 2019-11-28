@@ -1,8 +1,8 @@
 <?php 
 class city { 
     public $id;
-    public $first_name;
-    public $last_name;
+    public $firstname;
+    public $lastname;
     public $email;
     public $password;
 } 

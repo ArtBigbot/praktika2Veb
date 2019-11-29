@@ -1,12 +1,14 @@
 <?php 
-use praktika2Veb\praktika2web\classes\country as CountryObject;
+namespace CountryAPI;
+use praktika2Veb\classes\Country as CountryObject;
 use praktika2Veb\vendor\slim\slim\Slim\Route ;
 use psr\container\src\ContainerInterface;
 //require_once "vendor/autoload.php";
 //\Slim\Slim::registerAutoloader();
 //$app = new \Slim\Slim();
 //var_dump(app);
-class country extends Route { 
+
+class Country extends Route { 
    protected $container;
    public function __construct(ContainerInterface $container) {
     $this->container = $container;
@@ -77,4 +79,5 @@ class country extends Route {
 
 
 } 
+
 ?>

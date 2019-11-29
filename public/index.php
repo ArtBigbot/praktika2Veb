@@ -5,7 +5,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
   use Slim\Factory\AppFactory;
 
   //require_once __DIR__ . '/../bootstrap/app.php';
-  require  'C:\xampp\htdocs\praktika2Veb\vendor\autoload.php';
+  require __DIR__ . '/../vendor/autoload.php';
   //require_once( realpath( dirname( __FILE__ ) ).'/vendor/autoload.php' );
   $container = new Container();
 
@@ -81,12 +81,12 @@ $app->get('/hello/{name}', function (Request $request, Response $response, $args
 //
 
 
-$app-> group('/api',function ()  {
-    $app->group('/v1',function() use ($api){
+//$app-> group('/api',function ()  {
+   // $app->group('/v1',function() use ($api){
         //get methods
-        $app->get('/all',\classes\Country::class .':getCountries');// get all countries
+        $app->get('/all','\CountryAPI\Country:getCountries');// get all countries
   
-        $app->get('/world/country/continent/:name',\classes\Country::class .':getCountryByContinent');// get continent by name
+        $app->get('/world/country/continent/:name',\Country::class .':getCountryByContinent');// get continent by name
        // $app->get('/world/country/{name}/city/all','\app\db\country:getAllCities');
         
     
@@ -98,8 +98,8 @@ $app-> group('/api',function ()  {
 
         //delete methods
         $app->delete('/cities/:cityId?','\praktika2web\classes\City:deleteCity');
-    })->add(new RouteMiddleware());
-})->add(new GroupMiddleware());
+    //})->add(new RouteMiddleware());
+//})->add(new GroupMiddleware());
 
 $app->run();
 

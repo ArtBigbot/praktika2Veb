@@ -8,7 +8,7 @@ use psr\container\src\ContainerInterface;
 //$app = new \Slim\Slim();
 //var_dump(app);
 
-class Country extends Route { 
+class Country extends RedBean_SimpleModel { 
    protected $container;
    public function __construct(ContainerInterface $container) {
     $this->container = $container;

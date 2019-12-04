@@ -4,7 +4,7 @@ class CountryFactory{
     function __invoke()
     {
         $country = new \App\Models\CountryModel();
-        return new \praktika2Veb\app\Country($city);
+        return new \praktika2Veb\app\Country($country);
     }
 }
 

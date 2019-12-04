@@ -1,31 +1,38 @@
 <?php
+
 use DI\Container;
 use \Psr\Http\Message\ServerRequestInterface as Request;
   use \Psr\Http\Message\ResponseInterface as Response;
   use Slim\Factory\AppFactory;
+  use Phinx\Migration\AbstractMigration;
+  use praktika2Veb\classes\Country;
+  
 
 
   //require_once __DIR__ . '/../bootstrap/app.php';
   require __DIR__ . '/../vendor/autoload.php';
   require __DIR__ . '/../vendor/rb.php';
-  R::setup('mysql:host=localhost;dbname=praktika2WS','root','');
+  //R::setup('mysql:host=localhost;dbname=praktika2WS','root','');
 
   //require_once( realpath( dirname( __FILE__ ) ).'/vendor/autoload.php' );
   //$container = new Container();
 
   //AppFactory::setContainer($container); 
-
-  $app = AppFactory::create(); 
-
- // $container = $app->getContainer();
-/*
+  /*
+  $container = new Container();
+  $container = $app->getContainer();
+  AppFactory::setContainer($container);
   $container->set('Country', function (ContainerInterface $c) {
       $view = $c->get('view'); // retrieve the 'view' from the container
       return new Country($view);
 
   });
-*/
-
+  */
+  //$container = new Container();
+  
+//AppFactory::setContainer($container);
+  $app = AppFactory::create(); 
+ // $app->add(MethodOverrideMiddleware::class);
 
 
 //require __DIR__ . '/../vendor/autoload.php';
@@ -85,27 +92,34 @@ $app->get('/hello/{name}', function (Request $request, Response $response, $args
 //
 
 
+
+
 //$app-> group('/api',function ()  {
    // $app->group('/v1',function() use ($api){
         //get methods
-       // $app->get('/all','\CountryAPI\Country:getCountries');// get all countries
-        $app->get('/countryById/{id}', function($request, $response, $args){
-           // $api = $this->api;
-          
-           // $sql = new DbQuery();
-           // $sql->select('country.*');
-           /*
-            $sql->from('country','country');
-            $countries = Db::getInstance()->executeS($sql);
-            return $api->response([
-                'sucess'=>true,
-                'countries'=>$countries
-            ]);
-            */
+        //$app = new \DI\Bridge\Slim\App;
+        $app->get('/getAllCountries',\app\Controllers\CountryController::class);// get all countries
+       /*
+       $app->get('/getCountries',function() {
+        $page = new Country();
+        $page->getCountries(); 
+    });
+    */
+        // $app->get('/allCountries', function($request, $response){
+           
+            
+            /*
             $id =$args['id'];
             $country= R::load('country',$id);
             return $country;
-        });
+            */
+            /*
+            $builder = $this->getQueryBuilder();
+            $statement = $builder->select('*')->from('country')->execute();
+            var_dump($statement->fetchAll());
+                return $builder;
+                */
+       // });
 
   
         $app->get('/world/country/continent/:name',\Country::class .':getCountryByContinent');// get continent by name

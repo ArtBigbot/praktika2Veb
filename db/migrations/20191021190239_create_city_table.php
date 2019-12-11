@@ -44,4 +44,5 @@ class CreateCityTable extends AbstractMigration
         $this->dropTable('city');
     }
     */
+   
 }

@@ -31,13 +31,13 @@ class UserTable extends AbstractMigration
      */
      public function change()
      {
-        $user = $this->table('user');
+        $user = $this->table('users');
         $user->addColumn('id','integer');
-        $user = $this->table('user');
-        $user->addColumn('first_name', 'string')
-        ->addColumn('last_name', 'string')
+        $user = $this->table('users');
+        $user->addColumn('firstname', 'string')
+        ->addColumn('lastname', 'string')
         ->addColumn('email', 'string')
-        ->addColumn('password', 'integer')
+        ->addColumn('password', 'string')
         ->create();
      }
 }

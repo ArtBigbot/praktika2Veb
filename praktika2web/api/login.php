@@ -1,80 +1,79 @@
 <?php
-include_once './config/database.php';
-require "../vendor/autoload.php";
-use \Firebase\JWT\JWT;
-
-header("Access-Control-Allow-Origin: *");
+// required headers
+header("Access-Control-Allow-Origin: http://localhost/rest-api-authentication-example/");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
-
-$email = '';
-$password = '';
-
-$databaseService = new DatabaseService();
-$conn = $databaseService->getConnection();
-
-
-
+ 
+// database connection will be here
+// files needed to connect to database
+include_once 'config/database.php';
+include_once 'objects/user.php';
+ 
+// get database connection
+$database = new Database();
+$db = $database->getConnection();
+ 
+// instantiate user object
+$user = new User($db);
+ 
+// check email existence here
+// get posted data
 $data = json_decode(file_get_contents("php://input"));
-
-$email = $data->email;
-$password = $data->password;
-
-$table_name = 'Users';
-
-$query = "SELECT id, first_name, last_name, password FROM " . $table_name . " WHERE email = ? LIMIT 0,1";
-
-$stmt = $conn->prepare( $query );
-$stmt->bindParam(1, $email);
-$stmt->execute();
-$num = $stmt->rowCount();
-
-if($num > 0){
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    $id = $row['id'];
-    $firstname = $row['first_name'];
-    $lastname = $row['last_name'];
-    $password2 = $row['password'];
-
-    if(password_verify($password, $password2))
-    {
-        $secret_key = "YOUR_SECRET_KEY";
-        $issuer_claim = "THE_ISSUER"; // this can be the servername
-        $audience_claim = "THE_AUDIENCE";
-        $issuedat_claim = time(); // issued at
-        $notbefore_claim = $issuedat_claim + 10; //not before in seconds
-        $expire_claim = $issuedat_claim + 60; // expire time in seconds
-        $token = array(
-            "iss" => $issuer_claim,
-            "aud" => $audience_claim,
-            "iat" => $issuedat_claim,
-            "nbf" => $notbefore_claim,
-            "exp" => $expire_claim,
-            "data" => array(
-                "id" => $id,
-                "firstname" => $firstname,
-                "lastname" => $lastname,
-                "email" => $email
-        ));
-
-        http_response_code(200);
-
-        $jwt = JWT::encode($token, $secret_key);
-        echo json_encode(
+ 
+// set product property values
+$user->email = $data->email;
+$email_exists = $user->emailExists();
+ 
+// files for jwt will be here
+// generate json web token
+include_once 'config/core.php';
+include_once 'libs/php-jwt-master/src/BeforeValidException.php';
+include_once 'libs/php-jwt-master/src/ExpiredException.php';
+include_once 'libs/php-jwt-master/src/SignatureInvalidException.php';
+include_once 'libs/php-jwt-master/src/JWT.php';
+use \Firebase\JWT\JWT;
+ 
+// generate jwt will be here
+// check if email exists and if password is correct
+if($email_exists && password_verify($data->password, $user->password)){
+ 
+    $token = array(
+       "iss" => $iss,
+       "aud" => $aud,
+       "iat" => $iat,
+       "nbf" => $nbf,
+       "data" => array(
+           "id" => $user->id,
+           "firstname" => $user->firstname,
+           "lastname" => $user->lastname,
+           "email" => $user->email
+       )
+    );
+ 
+    // set response code
+    http_response_code(200);
+ 
+    // generate jwt
+    $jwt = JWT::encode($token, $key);
+    echo json_encode(
             array(
                 "message" => "Successful login.",
-                "jwt" => $jwt,
-                "email" => $email,
-                "expireAt" => $expire_claim
-            ));
-    }
-    else{
-
-        http_response_code(401);
-        echo json_encode(array("message" => "Login failed.", "password" => $password));
-    }
+                "jwt" => $jwt
+            )
+        );
+ 
+}
+ 
+// login failed will be here
+// login failed
+else{
+ 
+    // set response code
+    http_response_code(401);
+ 
+    // tell the user login failed
+    echo json_encode(array("message" => "Login failed."));
 }
 ?>

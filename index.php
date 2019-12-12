@@ -2,7 +2,7 @@
 require_once "vendor/autoload.php";
 \Slim\Slim::registerAutoloader();
 $app = new \Slim\Slim();
-
+//kkk
 //$app->get('/api/v1/world/country/all', function(){
     /*
     require_once('/db/dbconnect.php');

@@ -1,5 +1,5 @@
 <?php
-// required headers
+// required headers. We need to set headers on this new file so that it will only accept JSON data
 header("Access-Control-Allow-Origin: http://localhost/rest-api-authentication-example/");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");

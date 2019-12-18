@@ -1,5 +1,5 @@
 <?php
-// required headers
+// required headers. Set the file headers so that it will know where the request should come from and what type of data is accepted
 header("Access-Control-Allow-Origin: http://localhost/rest-api-authentication-example/");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
@@ -27,7 +27,7 @@ $user->email = $data->email;
 $email_exists = $user->emailExists();
  
 // files for jwt will be here
-// generate json web token
+// generate json web token  //code below shows the necessary files we needed to include to generate or encode a JSON web token
 include_once 'config/core.php';
 include_once 'libs/php-jwt-master/src/BeforeValidException.php';
 include_once 'libs/php-jwt-master/src/ExpiredException.php';

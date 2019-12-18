@@ -4,7 +4,7 @@ class Database{
  
     // specify your own database credentials
     private $host = "localhost";
-    private $db_name = "praktika2ws";
+    private $db_name = "newdb";
     private $username = "root";
     private $password = "";
     public $conn;

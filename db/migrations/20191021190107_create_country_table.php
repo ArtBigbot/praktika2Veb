@@ -1,8 +1,6 @@
 <?php
-
 use Phinx\Migration\AbstractMigration;
-
-class UserTable extends AbstractMigration
+class CreateCountryTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -29,15 +27,30 @@ class UserTable extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-     public function change()
+    public function change() 
+{ 
+$country = $this->table('country'); 
+$country->addColumn('code', 'string') 
+->addColumn('name', 'string') 
+->addColumn('continent', 'string') 
+->addColumn('region', 'string') 
+->addColumn('surfacearea', 'integer') 
+->addColumn('indepyear', 'integer') 
+->addColumn('population', 'integer') 
+->addColumn('lifeexpectancy', 'double') 
+->addColumn('gnp', 'integer') 
+->addColumn('gnpold', 'integer') 
+->addColumn('localname', 'string') 
+->addColumn('governmentform', 'string') 
+->addColumn('headofstate', 'string') 
+->addColumn('capital', 'integer') 
+->addColumn('code2', 'string') 
+->create(); 
+}
+ /*
+     public function down()
      {
-        $user = $this->table('users');
-        $user->addColumn('id','integer');
-        $user = $this->table('users');
-        $user->addColumn('firstname', 'string')
-        ->addColumn('lastname', 'string')
-        ->addColumn('email', 'string')
-        ->addColumn('password', 'string')
-        ->create();
+         $this->dropTable('country');
      }
+ */
 }

@@ -1,6 +1,8 @@
 <?php 
 namespace App\Controllers;
 use \RedBeanPHP\R as R;
+use \Psr\Http\Message\ServerRequestInterface as Request;
+  use \Psr\Http\Message\ResponseInterface as Response;
 //use praktika2Veb\vendor\rb;
 
 //require_once "vendor/autoload.php";
@@ -9,15 +11,25 @@ use \RedBeanPHP\R as R;
 //var_dump(app);
 require 'C:\xampp\htdocs\praktika2Veb\vendor\rb.php';
 R::setup( 'mysql:host=localhost;dbname=praktika2ws','root', 'root' );
+
 class CountryController  { 
   public  $country;
    protected $container;
    
   
-   public  function getCountries( ){
+   public  function getCountries(){
      if(R::testConnection()){
+         
         $countries = R::findAll( 'country' );
-        echo '<pre>' ;print_r($countries);echo '</pre>';
+        $JSONcountry = json_encode(R::exportAll($countries));
+        echo ($JSONcountry);
+           // if ($request->getallheaders('X-Requested-With')==='XMLHttpRequest'){
+               
+               // return  json_encode($countries);
+           // }else{
+              //  return $response->withRedirect($request->getHeader('Referer'));
+            //}
+       
      }else{
          exit('There is no connection to database');
      }

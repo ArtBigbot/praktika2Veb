@@ -24,7 +24,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
    // $app->group('/v1',function() use ($api){
         //get methods
         //$app = new \DI\Bridge\Slim\App;
-        
+       // $isXHR = $app->request->isAjax();
         $app->get('/api/v1/world/country/all',CountryController::class. ':getCountries');// get all countries
         $app->get('/world/country/continent/{name}',function (Request  $request , Response $response, $args){
           $continentName = $args['name'];

@@ -27,6 +27,7 @@ class CreateCityTable extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
+    /*
     public function change() 
     { 
     $city = $this->table('city'); 
@@ -38,11 +39,27 @@ class CreateCityTable extends AbstractMigration
     ->addColumn('population', 'integer') 
     ->create(); 
     }
-    /*
+    */
+    public function up()
+    { 
+    $city = $this->table('city'); 
+    $city->addColumn('id','integer'); 
+    $city = $this->table('city'); 
+    $city->addColumn('name', 'string') 
+    ->addColumn('countrycode', 'string')
+    ->addColumn('countrycode_id','integer')
+    ->addForeignKey('countrycode_id', 'country', 'id')
+    ->addColumn('district', 'string') 
+    ->addColumn('population', 'integer') 
+    ->addIndex(['name'])
+    ->save();
+    }
+    
+    
     public function down()
     {
         $this->dropTable('city');
     }
-    */
+    
    
 }

@@ -1,0 +1,23 @@
+[
+    {
+      "id": "1",
+      "name": "Kabul",
+      "countrycode": "AFG",
+      "district": "Kabul",
+      "population": "1237500"
+    },
+    {
+      "id": "2",
+      "name": "Qandahar",
+      "countrycode": "AFG",
+      "district": "Qandahar",
+      "population": "237500"
+    },
+    {
+      "id": "3",
+      "name": "Herat",
+      "countrycode": "AFG",
+      "district": "Herat",
+      "population": "186800"
+    }
+]
